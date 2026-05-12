@@ -220,3 +220,101 @@ while (length1 > 0) {
     length1--
 
 }
+
+//C. For Loop
+
+//1. Find Sum of First 100 Numbers
+
+let range = 100;
+let add = 0;
+
+for (let i = 1; i<=100; i++)
+{
+    add += i;
+}
+console.log("Sum of first 100 numbers is: ", add)
+
+
+//2. Reverse a String Using for Loop
+
+let text = "Hello";
+let len = text.length;
+let ch = "";
+
+for(let i = len-1; i>=0; i--)
+{
+    ch += text[i];
+}
+console.log(`Reverse of "${text}" is:  `, ch);
+
+
+//3. Count Vowels in a String
+
+let string1 = "Automation!";
+let count1 = 0;
+
+for (let i = 0; i < string1.length; i++) {
+    let ch = string1[i].toLocaleLowerCase();
+    if (ch === 'a' || ch === 'e' || ch === 'i' || ch === 'o' || ch === 'u') {
+        count1 = count1 + 1
+    }
+
+}
+console.log(`"${string1}" text contains vowels:`, count1);
+
+
+//4. Check Prime Number
+
+let number2 = 131;
+let isPrime = true;
+
+for (let i = 2; i <=Math.sqrt(number2); i++) {
+    if (number2 % i === 0) {
+        isPrime = false;
+        break;
+    }
+}
+
+if (isPrime) {
+    console.log(`Nummber ${number2} is Prime number.`);
+}
+else {
+    console.log(`Nummber ${number2} is Not a Prime number.`);
+}
+
+
+//5. Find Prime Number list from 1 to 100
+
+let range1 = 100;
+
+let list = [];
+for (let i = 2; i<=range1; i++){
+    let isPrime1 = true;
+    for (let j = 2; j <=Math.sqrt(i); j++) {
+        if (i % j === 0) {
+            isPrime1 = false;
+            break;
+        }
+    }
+
+    if(isPrime1)
+    {
+        list.push(i);
+    }
+    
+}
+
+console.log(list);
+
+//6. Find Largest Number in Array
+
+let arr1 = [-10, -20, -34, -55, -99, -87];
+let maxnumber = arr1[1];
+for (let i = 0; i < arr1.length; i++) {
+
+    if (arr1[i] > maxnumber) {
+        maxnumber = arr1[i];
+    }
+}
+
+console.log("\nMax number is: ", maxnumber);
