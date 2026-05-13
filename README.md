@@ -8,5 +8,5 @@ Daily practice commits tracking my progress.
 | Day | Topic | Status |
 |-----|-------|--------|
 | Day 1 | JavaScript Variables and Strings | ✅ Done |
-| Day 2 | JavaScript Loops and Arrays | In Progress |
+| Day 2 | JavaScript Loops and Arrays | ✅ Done |
 
