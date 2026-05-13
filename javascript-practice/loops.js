@@ -318,3 +318,70 @@ for (let i = 0; i < arr1.length; i++) {
 }
 
 console.log("\nMax number is: ", maxnumber);
+console.log("__________________________")
+//7. Nested loop: browsers × test cases → print execution matrix.
+
+let browsers = ["Chrome", "Firefox","Edge"];
+let testCases = ["Login", "Sign Up", "Payment Test"];
+
+for(let i = 0; i<browsers.length; i++)
+{
+    console.log("Browser:", browsers[i]);
+    for(let j = 0; j<testCases.length; j++){
+        console.log("Running", testCases[j]+ " On " + browsers[i]);
+    }
+    console.log("__________________________")
+}
+
+//8. Loop through log lines, extract only error messages.
+
+let logs = [
+    "INFO: Browser launched",
+    "INFO: User logged in",
+    "ERROR: Payment failed",
+    "WARNING: Slow response",
+    "ERROR: API timeout"
+];
+
+for (let i =0 ; i < logs.length; i++)
+{
+    let line = logs[i];
+
+    if(line.includes("ERROR"))
+    {
+        console.log(line);
+    }
+}
+console.log("__________________________")
+
+
+//9. Loop through dropdown options, validate expected values.
+
+let actualCountry = ["India", "UK", "Japan", "US"];
+let expectedCountry = ["India", "China", "Japan"];
+
+for( i = 0; i<expectedCountry.length; i++)
+{
+    let expected = expectedCountry[i];
+
+    if(actualCountry.includes(expected))
+    {
+        console.log("Dropdown value is present:", expected);
+    }
+    else
+    {
+        console.log("Dropdown value is missing", expected);
+    }
+}
+console.log("__________________________")
+
+//10.	Generate test data: 50 random usernames
+
+let username = "";
+
+for(i=1; i<=50; i++)
+{
+    let randomnumber = Math.floor(Math.random()*1000);
+    username = "user" + randomnumber;
+    console.log(username);
+}
