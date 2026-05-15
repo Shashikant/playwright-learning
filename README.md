@@ -9,5 +9,6 @@ Daily practice commits tracking my progress.
 |-----|-------|--------|
 | Day 1 | JavaScript Variables and Strings | ✅ Done |
 | Day 2 | JavaScript Loops and Arrays | ✅ Done |
-| Day 3 | JavaScripts Functions | ✅ Done |
+| Day 3 | JavaScript Functions | ✅ Done |
+| Day 4 | JavaScript Objects | In Progress |
 
