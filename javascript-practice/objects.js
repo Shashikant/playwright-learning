@@ -157,3 +157,60 @@ let obj2 = {
 };
 
 console.log(obj2);
+console.log("-----------------------------")
+//8. Convert object → JSON string.
+
+let teamMember = {
+    player: "Sachin",
+    age: 34,
+    skill: "Batting"
+}
+
+let jsonString = JSON.stringify(teamMember);
+console.log(jsonString);
+
+console.log("-----------------------------")
+
+//9. Parse JSON string → object.
+
+let jsonData = '{"id":101,"name":"Login Test","status":"Pass"}';
+
+let testcase = JSON.parse(jsonData);
+
+console.log(testcase);
+console.log("Test case name:", testcase.name);
+
+console.log("-----------------------------")
+
+//10. Merge two test case objects.
+
+let testCase1 = {
+    id: 101,
+    name: "Login Test"
+};
+
+let testCase2 = {
+    status: "Pass",
+    priority: "High"
+};
+
+let mergedTets = {...testCase1, ...testCase2}
+console.log(mergedTets);
+console.log("-----------------------------")
+//11. Freeze object → prevent modification.
+
+let testCase = {
+    id: 101,
+    name: "Login Test",
+    status: "Pass"
+};
+
+Object.freeze(testCase);
+
+testCase.status = "Fail"; // won't change
+testCase.priority = "High"; // won't add
+delete testCase.name; // won't delete
+
+console.log(testCase);
+
+console.log("-----------------------------")
