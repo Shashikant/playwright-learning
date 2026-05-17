@@ -13,4 +13,4 @@ Daily practice commits tracking my progress.
 | Day 4 | JavaScript Objects | ✅ Done |
 | Day 5, Day 6 | JavaScript OOPs | ✅ Done |
 | Day 7 | JavaScript Date function | In Progress |
-| Daye 8 | JavaScript Regular Expression |  |
+| Day 8 | JavaScript Regular Expression |  |
