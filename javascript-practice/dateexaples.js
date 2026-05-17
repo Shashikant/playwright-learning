@@ -64,3 +64,27 @@ else
     console.log(`Current year ${year} is not a leap year`);
 }
 console.log("------------------");
+
+//9. Function that takes two dates and returns the number of weekends between them.
+
+function calculateWeek(d1, d2){
+    let start = new Date (d1);
+    let end = new Date (d2);
+    let weekendCount = 0;
+    const day = start.getDay();
+    while(start<=end)
+    {
+        if(day === 0 || day === 1)
+        {
+            weekendCount++;
+        }
+        start.setDate(start.getDate()+1);
+    }
+    console.log("Total weekends are:", weekendCount);
+}
+
+calculateWeek("2026-05-17", "2026-6-18");
+
+console.log("------------------");
+
+
