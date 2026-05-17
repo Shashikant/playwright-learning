@@ -11,4 +11,4 @@ Daily practice commits tracking my progress.
 | Day 2 | JavaScript Loops and Arrays | ✅ Done |
 | Day 3 | JavaScript Functions | ✅ Done |
 | Day 4 | JavaScript Objects | ✅ Done |
-| Day 5, Day 6 | JavaScript OOPs | In Progress |
+| Day 5, Day 6 | JavaScript OOPs | ✅ Done |
