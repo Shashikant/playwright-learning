@@ -1,0 +1,52 @@
+[
+    {
+        "tcname": "Verify_title_TC001",
+        "title": "vtiger CRM - Commercial Open Source CRM"
+    },
+    {
+        "tcname": "Verify_invalid_password_TC_003",
+        "username": "admin",
+        "password": "admin1@23"
+    },
+    {
+        "tcname": "Verify_invalid_userid_TC_004",
+        "username": "admin123",
+        "password": "admin"
+    },
+    
+    {
+        "tcname": "Verify_blank_userid_TC_005",
+        "username": "",
+        "password": "admin"
+    },
+    
+    {
+        "tcname": "Verify_blank_password_TC_006",
+        "username": "admin",
+        "password": ""
+    },
+    {
+        "tcname": "Verify_valid_login_details_TC007",
+        "username": "admin",
+        "password": "admin"
+    },
+    {
+        "tcname": "Verify_Create_NewLead_Mandatory_Fields_TC008",
+        "username": "admin",
+        "password": "admin",
+        "lastname": "John",
+        "company": "Google"
+    },
+    {
+        "tcname": "Verify_My_Account_Drag_and_Drop_TC_009",
+        "username": "admin",
+        "password": "admin",
+        "value": "Calendar"
+    },
+    {
+        "tcname": "Verify_Mouse_Hover_Link_TC_010",
+        "username": "admin",
+        "password": "admin"
+    }
+
+]
