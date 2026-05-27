@@ -8,14 +8,26 @@ export class HomePage{
     }
 
     //Locators:
-    loc_lnk_logout = '//a[text()="Logout"]';
-    
+    loc_logout_lnk = '//a[text()="Logout"]';
+    loc_welcome_msg = '//strong[contains(normalize-space(),"Welcome admin")]';
+    loc_newlead_lnk = '//a[text()="New Lead"]';
 
     async clickLogout()
     {
-        await this.page.click(this.loc_lnk_logout);
+        await this.page.click(this.loc_logout_lnk);
     }
 
-    
+    async isWelcomeMsg():Promise<boolean>
+    {
+        return this.page.isVisible(this.loc_welcome_msg);
+    }
+
+    async clickNewLead()
+    {
+        
+        await this.page.click(this.loc_newlead_lnk);
+    }
+
+
 
 }

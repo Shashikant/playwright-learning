@@ -80,5 +80,7 @@ test('Verify_valid_login_details_TC005', async ({ page }) => {
   await loginPage.setUsername('admin');
   await loginPage.setPassword('admin');
   await loginPage.clickLogin();
+  const isWelcomeMsg = await homePage.isWelcomeMsg();
+  expect(isWelcomeMsg).toBe(true);
   await page.close();
 })

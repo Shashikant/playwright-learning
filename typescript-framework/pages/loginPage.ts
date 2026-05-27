@@ -20,7 +20,7 @@ export class LoginPage{
     {
         await this.setUsername(userid);
         await this.setPassword(password);
-        await this.clickLogin;
+        await this.clickLogin();
     }
 
     async setUsername(userid:string)
