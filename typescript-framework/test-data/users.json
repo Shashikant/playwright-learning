@@ -1,0 +1,6 @@
+{
+    "Verify_Create_NewLead_Mandatory_Fields_TC001": {
+        "username": "admin",
+        "password": "admin"
+    }
+}

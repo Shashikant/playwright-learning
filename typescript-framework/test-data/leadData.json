@@ -1,0 +1,14 @@
+{
+    "Verify_Create_NewLead_Mandatory_Fields_TC001": {
+        "username": "admin",
+        "password": "admin",
+        "lastname": "Jackson",
+        "company": "Sony"
+    },
+    "Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003":{
+        "username": "admin",
+        "password": "admin",
+        "lastname": "Tom",
+        "company": "Zee"
+    }
+}

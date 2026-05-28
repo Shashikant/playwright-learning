@@ -1,0 +1,2 @@
+﻿tcname,username,password,salutationtype,firstname,lastname,company,annualrevenue,designation,industry,leadsource,noofemployees,yahooid,phone,mobile,fax,email,website,leadstatus,rating,lane,state,city,code,country,description
+Verify_Create_NewLead_All_Fields_TC002,admin,admin,Mr.,Robert,Mohan,HotStar,350000,VP,Energy,Partner,100,rmohan@yahoo.com,4512387,9562345,98212,rmohan@hotstar.com,www.hotstar.com,Warm,Active,Market Street,California,San Francisco,94103,United States,Lead generated from LinkedIn campaign. Follow-up scheduled next week.

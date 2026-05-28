@@ -2,6 +2,8 @@ import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/homePage";
 import { LeadPage } from "../pages/leadPage";
 import { LoginPage } from "../pages/loginPage";
+import { getTestData } from "../utils/leadsJsonReader";
+import { getCSVTestData } from "../utils/csvReader";
 
 let homePage: HomePage;
 let loginPage: LoginPage;
@@ -13,10 +15,11 @@ test('Verify_Create_NewLead_Mandatory_Fields_TC001', async({page})=> {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    await loginPage.login("admin", "admin");
+    const testData = await getTestData("Verify_Create_NewLead_Mandatory_Fields_TC001");
+    await loginPage.login(testData.username, testData.password);
     await homePage.clickNewLead();
-    await leadPage.setLastName("Nitin");
-    await leadPage.setCompany("ExploreWorld");
+    await leadPage.setLastName(testData.lastname);
+    await leadPage.setCompany(testData.password);
     await leadPage.clickSave();
     const isLastNameDisplayed = await leadPage.isLastNameDisplayed();
     expect(isLastNameDisplayed).toBe(true)
@@ -34,34 +37,35 @@ test('Verify_Create_NewLead_All_Fields_TC002', async({page})=> {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    await loginPage.login("admin", "admin");
+    const testData = await getCSVTestData('./test-data/leadData.csv','Verify_Create_NewLead_All_Fields_TC002');
+    await loginPage.login(testData.username, testData.password);
     await homePage.clickNewLead();
-    await leadPage.selectSalutationtype('Mr.');
-    await leadPage.setFirstName("Phil");
-    await leadPage.setLastName("Jack");
-    await leadPage.setCompany("Micronite");
+    await leadPage.selectSalutationtype(testData.salutationtype);
+    await leadPage.setFirstName(testData.firstname);
+    await leadPage.setLastName(testData.lastname);
+    await leadPage.setCompany(testData.company);
     
-    await leadPage.setDesignation("Manager");
-    await leadPage.selectLeadsource("Direct Mail");
-    await leadPage.selectIndustry("Chemicals");
-    await leadPage.setAnnualRevenue("10000");
-    await leadPage.setNoOfEmployee("35");
-    await leadPage.setYahooid("willJack@yahoo.com");
-    await leadPage.setPhone("3412345");
-    await leadPage.setMobile("98234111");
-    await leadPage.setFax("0001234");
-    await leadPage.setEmail("phillJack@Game.com");
-    await leadPage.setWebsite("Not Available");
-    await leadPage.selectLeadstatus("Hot");
-    await leadPage.selectRating("Acquired");
+    await leadPage.setDesignation(testData.designation);
+    await leadPage.selectLeadsource(testData.leadsource);
+    await leadPage.selectIndustry(testData.industry);
+    await leadPage.setAnnualRevenue(testData.annualrevenue);
+    await leadPage.setNoOfEmployee(testData.noofemployees);
+    await leadPage.setYahooid(testData.yahooid);
+    await leadPage.setPhone(testData.phone);
+    await leadPage.setMobile(testData.mobile);
+    await leadPage.setFax(testData.fax);
+    await leadPage.setEmail(testData.email);
+    await leadPage.setWebsite(testData.website);
+    await leadPage.selectLeadstatus(testData.leadstatus);
+    await leadPage.selectRating(testData.rating);
     
-    await leadPage.setStreet("Market Street");
-    await leadPage.setState("California");
-    await leadPage.setCity("San Francisco");
-    await leadPage.setPostalCode("94103");
-    await leadPage.setCountry("United States");
+    await leadPage.setStreet(testData.lane);
+    await leadPage.setState(testData.state);
+    await leadPage.setCity(testData.city);
+    await leadPage.setPostalCode(testData.code);
+    await leadPage.setCountry(testData.country);
 
-    await leadPage.setDescription("Lead generated from LinkedIn campaign. Follow-up scheduled next week.")
+    await leadPage.setDescription(testData.description)
 
 
     await leadPage.clickSave();
@@ -80,10 +84,11 @@ test('Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003', async({page
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    await loginPage.login("admin", "admin");
+    const testData = await getTestData("Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003")
+    await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
-    await leadPage.setLastName("Vaibhav");
-    await leadPage.setCompany("RR");
+    await leadPage.setLastName(testData.lastname);
+    await leadPage.setCompany(testData.company);
     await leadPage.clickSave();
     const isLastNameDisplayed = await leadPage.isLastNameDisplayed();
     expect(isLastNameDisplayed).toBe(true)
