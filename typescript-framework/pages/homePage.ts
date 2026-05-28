@@ -11,6 +11,7 @@ export class HomePage{
     loc_logout_lnk = '//a[text()="Logout"]';
     loc_welcome_msg = '//strong[contains(normalize-space(),"Welcome admin")]';
     loc_newlead_lnk = '//a[text()="New Lead"]';
+    loc_leads_lnk = '//a[text()="Leads"]';
 
     async clickLogout()
     {
@@ -26,6 +27,11 @@ export class HomePage{
     {
         
         await this.page.click(this.loc_newlead_lnk);
+    }
+
+    async clickLeads()
+    {
+        await this.page.click(this.loc_leads_lnk);
     }
 
 

@@ -1,11 +1,12 @@
-import { Page } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
+import { doesNotThrow } from "node:assert";
 import { stat } from "node:fs";
 
 export class LeadPage {
 
     page: Page;
 
-    //Locator:
+    //Locators:
     loc_dropdown_salutationtype = '//select[@name="salutationtype"]';
     loc_textbox_first_name = '//input[@name="firstname"]';
     loc_textbox_last_name = '//input[@name="lastname"]';
@@ -34,7 +35,8 @@ export class LeadPage {
     loc_btn_save = '//input[@name="button"]';
     loc_txt_lastName = '//td[contains(text(),"Last Name")]/following::td[1]';
     loc_txt_company = '//td[contains(text(),"Company")]/following::td[1]';
-
+    loc_btn_search = '//input[@name="button" and @value="Search"]';
+    loc_txt_name = '(//td[contains(text(),"Lead List")]/following::tr[@class="oddListRow"]/td/a)[1]';
 
     constructor(page: Page) {
         this.page = page;
@@ -181,4 +183,39 @@ export class LeadPage {
         return this.page.isVisible(this.loc_txt_company);
     }
 
+    async searchLeadFirstName(firstname:string)
+    {
+        await this.page.locator(this.loc_textbox_first_name).nth(1).fill(firstname);
+    }
+    async searchLeadLastName(lastname:string)
+    {
+        await this.page.locator(this.loc_textbox_last_name).nth(1).fill(lastname);
+    }
+    async clickSearch()
+    {
+       await this.page.click(this.loc_btn_search);
+    }
+
+    async isLeadFirstNameVisible():Promise<boolean|null>
+    {
+        const textName = await this.page.locator(this.loc_txt_name).textContent();
+        console.log(textName);
+        return await this.page.locator(this.loc_txt_name).isVisible();
+    }
+
+    async isLeadLastNameVisible():Promise<boolean|null>
+    {
+      try{
+        await this.page.locator(this.loc_txt_name).waitFor({state:"visible",timeout: 3000});
+        const textName = await this.page.locator(this.loc_txt_name).textContent();
+        console.log(textName);
+        return await this.page.locator(this.loc_txt_name).isVisible();   
+      }
+      catch(error){
+        console.log("Lead serach failed or element not found");
+        return false;
+      }
+      
+        
+    }
 }

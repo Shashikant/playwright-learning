@@ -15,8 +15,8 @@ test('Verify_Create_NewLead_Mandatory_Fields_TC001', async({page})=> {
     await page.goto('/');
     await loginPage.login("admin", "admin");
     await homePage.clickNewLead();
-    await leadPage.setLastName("D'Silva");
-    await leadPage.setCompany("Microsoft");
+    await leadPage.setLastName("Nitin");
+    await leadPage.setCompany("ExploreWorld");
     await leadPage.clickSave();
     const isLastNameDisplayed = await leadPage.isLastNameDisplayed();
     expect(isLastNameDisplayed).toBe(true)
@@ -37,9 +37,9 @@ test('Verify_Create_NewLead_All_Fields_TC002', async({page})=> {
     await loginPage.login("admin", "admin");
     await homePage.clickNewLead();
     await leadPage.selectSalutationtype('Mr.');
-    await leadPage.setFirstName("Will");
+    await leadPage.setFirstName("Phil");
     await leadPage.setLastName("Jack");
-    await leadPage.setCompany("Micro");
+    await leadPage.setCompany("Micronite");
     
     await leadPage.setDesignation("Manager");
     await leadPage.selectLeadsource("Direct Mail");
@@ -50,7 +50,7 @@ test('Verify_Create_NewLead_All_Fields_TC002', async({page})=> {
     await leadPage.setPhone("3412345");
     await leadPage.setMobile("98234111");
     await leadPage.setFax("0001234");
-    await leadPage.setEmail("willJack@Game.com");
+    await leadPage.setEmail("phillJack@Game.com");
     await leadPage.setWebsite("Not Available");
     await leadPage.selectLeadstatus("Hot");
     await leadPage.selectRating("Acquired");
@@ -71,5 +71,72 @@ test('Verify_Create_NewLead_All_Fields_TC002', async({page})=> {
     const isCompanyDisplayed = await leadPage.isCompanyDisplayed();
     expect(isCompanyDisplayed).toBe(true);
 
+    await page.close();
+})
+
+test('Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003', async({page})=> {
+
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    leadPage = new LeadPage(page);
+    await page.goto('/');
+    await loginPage.login("admin", "admin");
+    await homePage.clickLeads();
+    await leadPage.setLastName("Vaibhav");
+    await leadPage.setCompany("RR");
+    await leadPage.clickSave();
+    const isLastNameDisplayed = await leadPage.isLastNameDisplayed();
+    expect(isLastNameDisplayed).toBe(true)
+
+    const isCompanyDisplayed = await leadPage.isCompanyDisplayed();
+    expect(isCompanyDisplayed).toBe(true);
+
+    await page.close();
+})
+
+test('Verify_Search_Existing_Lead_by_Firstname_TC004', async({page})=> {
+
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    leadPage = new LeadPage(page);
+    await page.goto('/');
+    await loginPage.login("admin", "admin");
+    await homePage.clickLeads();
+    await leadPage.searchLeadFirstName("Mary")
+    await leadPage.clickSearch();
+    const name = await leadPage.isLeadFirstNameVisible()
+    expect(name).toBe(true);
+    await page.close();
+})
+
+test('Verify_Search_Existing_Lead_by_Lastname_TC005', async({page})=> {
+
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    leadPage = new LeadPage(page);
+    await page.goto('/');
+    await loginPage.login("admin", "admin");
+    await homePage.clickLeads();
+    await leadPage.searchLeadLastName("Smith")
+    await leadPage.clickSearch();
+    const name = await leadPage.isLeadLastNameVisible()
+    expect(name).toBe(true);
+    
+    await page.close();
+})
+
+
+test('Verify_Search_Invalid_Lead_TC006', async({page})=> {
+
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    leadPage = new LeadPage(page);
+    await page.goto('/');
+    await loginPage.login("admin", "admin");
+    await homePage.clickLeads();
+    await leadPage.searchLeadLastName("Shashi")
+    await leadPage.clickSearch();
+    const name = await leadPage.isLeadLastNameVisible()
+    expect(name).toBe(false);
     await page.close();
 })

@@ -40,6 +40,8 @@ typescript-framework/
 
 
 # ✅ Completed Features
+| Topic|Status|
+|------|------|
 | Playwright setup |✅ Done |
 | TypeScript configuration | ✅ Done |
 | Initial framework structure | ✅ Done |
