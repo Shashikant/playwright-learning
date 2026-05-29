@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/homePage";
 import { LeadPage } from "../pages/leadPage";
 import { LoginPage } from "../pages/loginPage";
-import { getTestData } from "../utils/leadsJsonReader";
+import { getTestData } from "../utils/jsonReader";
 import { getCSVTestData } from "../utils/csvReader";
 
 let homePage: HomePage;
@@ -15,7 +15,7 @@ test('Verify_Create_NewLead_Mandatory_Fields_TC001', async({page})=> {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData("Verify_Create_NewLead_Mandatory_Fields_TC001");
+    const testData = await getTestData('./test-data/leadData.json',"Verify_Create_NewLead_Mandatory_Fields_TC001");
     await loginPage.login(testData.username, testData.password);
     await homePage.clickNewLead();
     await leadPage.setLastName(testData.lastname);
@@ -84,7 +84,7 @@ test('Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003', async({page
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData("Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003")
+    const testData = await getTestData('./test-data/leadData.json',"Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003")
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.setLastName(testData.lastname);
@@ -105,9 +105,10 @@ test('Verify_Search_Existing_Lead_by_Firstname_TC004', async({page})=> {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    await loginPage.login("admin", "admin");
+    const testData = await getTestData('./test-data/leadData.json','Verify_Search_Existing_Lead_by_Firstname_TC004')
+    await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
-    await leadPage.searchLeadFirstName("Mary")
+    await leadPage.searchLeadFirstName(testData.firstname)
     await leadPage.clickSearch();
     const name = await leadPage.isLeadFirstNameVisible()
     expect(name).toBe(true);
@@ -120,11 +121,12 @@ test('Verify_Search_Existing_Lead_by_Lastname_TC005', async({page})=> {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    await loginPage.login("admin", "admin");
+    const testData = await getTestData('./test-data/leadData.json','Verify_Search_Existing_Lead_by_Lastname_TC005')
+    await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
-    await leadPage.searchLeadLastName("Smith")
+    await leadPage.searchLeadLastName(testData.lastname);
     await leadPage.clickSearch();
-    const name = await leadPage.isLeadLastNameVisible()
+    const name = await leadPage.isLeadLastNameVisible();
     expect(name).toBe(true);
     
     await page.close();
@@ -137,9 +139,10 @@ test('Verify_Search_Invalid_Lead_TC006', async({page})=> {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    await loginPage.login("admin", "admin");
+    const testData = await getTestData('./test-data/leadData.json','Verify_Search_Invalid_Lead_TC006')
+    await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
-    await leadPage.searchLeadLastName("Shashi")
+    await leadPage.searchLeadLastName(testData.lastname);
     await leadPage.clickSearch();
     const name = await leadPage.isLeadLastNameVisible()
     expect(name).toBe(false);

@@ -47,4 +47,9 @@ export class LoginPage{
     {
         return this.page.isVisible(this.loc_txt_error_msg);
     }
+
+    async passwordFieldType():Promise<string|null>
+    {
+        return await this.page.locator(this.loc_txtbox_password).getAttribute("type");
+    }
 }

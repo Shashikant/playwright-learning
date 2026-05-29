@@ -10,5 +10,25 @@
         "password": "admin",
         "lastname": "Tom",
         "company": "Zee"
+    },
+    "Verify_Search_Existing_Lead_by_Firstname_TC004":{
+        "username": "admin",
+        "password": "admin",
+        "firstname": "Mary"
+        
+    },
+    "Verify_Search_Existing_Lead_by_Lastname_TC005":{
+        "username": "admin",
+        "password": "admin",
+        "lastname": "Smith"
+        
     }
+    ,
+    "Verify_Search_Invalid_Lead_TC006":{
+        "username": "admin",
+        "password": "admin",
+        "lastname": "Shakti"
+        
+    }
+
 }

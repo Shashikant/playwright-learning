@@ -2,5 +2,33 @@
     "Verify_Create_NewLead_Mandatory_Fields_TC001": {
         "username": "admin",
         "password": "admin"
-    }
+    },
+
+    "Verify_invalid_password_TC_003": {
+        "username": "admin",
+        "password": "admin1#23"
+    },
+
+    "Verify_invalid_userid_TC_004": {
+        "username": "admin1234",
+        "password": "admin"
+    },
+
+    "Verify_blank_userid_TC_005": {
+        "username": "",
+        "password": "admin"
+    },
+    "Verify_blank_password_TC_006": {
+        "username": "admin",
+        "password": ""
+    },
+    "Verify_valid_login_details_TC007": {
+        "username": "admin",
+        "password": "admin"
+    },
+    "Verify_password_field_hides_entered_characters_TC008": {
+        "username": "admin",
+        "password": "admin"
+    }     
+     
 }
