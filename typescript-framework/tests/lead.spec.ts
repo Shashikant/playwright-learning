@@ -64,10 +64,7 @@ test('Verify_Create_NewLead_All_Fields_TC002', async({page})=> {
     await leadPage.setCity(testData.city);
     await leadPage.setPostalCode(testData.code);
     await leadPage.setCountry(testData.country);
-
     await leadPage.setDescription(testData.description)
-
-
     await leadPage.clickSave();
     const isLastNameDisplayed = await leadPage.isLastNameDisplayed();
     expect(isLastNameDisplayed).toBe(true)
@@ -132,14 +129,31 @@ test('Verify_Search_Existing_Lead_by_Lastname_TC005', async({page})=> {
     await page.close();
 })
 
-
-test('Verify_Search_Invalid_Lead_TC006', async({page})=> {
+test('Verify_Search_Existing_Lead_by_Company_TC006', async({page})=> {
 
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json','Verify_Search_Invalid_Lead_TC006')
+    const testData = await getTestData('./test-data/leadData.json','Verify_Search_Existing_Lead_by_Company_TC006')
+    await loginPage.login(testData.username, testData.password);
+    await homePage.clickLeads();
+    await leadPage.searchbyCompany(testData.company);
+    await leadPage.clickSearch();
+    const name = await leadPage.isLeadLastNameVisible();
+    expect(name).toBe(true);
+    
+    await page.close();
+})
+
+
+test('Verify_Search_Invalid_Lead_TC007', async({page})=> {
+
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    leadPage = new LeadPage(page);
+    await page.goto('/');
+    const testData = await getTestData('./test-data/leadData.json','Verify_Search_Invalid_Lead_TC007')
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.searchLeadLastName(testData.lastname);
@@ -147,4 +161,53 @@ test('Verify_Search_Invalid_Lead_TC006', async({page})=> {
     const name = await leadPage.isLeadLastNameVisible()
     expect(name).toBe(false);
     await page.close();
+})
+
+test('Verify_existing_lead_details_can_be_updated_TC008', async({page})=> {
+
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    leadPage = new LeadPage(page);
+    await page.goto('/');
+    const testData = await getTestData('./test-data/leadData.json','Verify_existing_lead_details_can_be_updated_TC008')
+    await loginPage.login(testData.username, testData.password);
+    await homePage.clickLeads();
+    await leadPage.searchLeadLastName(testData.lastname);
+    await leadPage.clickSearch();
+    const name = await leadPage.isLeadLastNameVisible()
+    expect(name).toBe(true);
+    await leadPage.clickEditLeadLink();
+    await leadPage.editExistingLead(testData.salutationtype,testData.industry);
+    await leadPage.searchLeadLastName(testData.lastname);
+    await leadPage.clickSearch();
+    await leadPage.viewLead();
+
+    const getSaluationType = await leadPage.getSaluationType();
+    expect(getSaluationType).toContain(testData.salutationtype);
+
+    const getIndustry = await leadPage.getIndustry();
+    expect(getIndustry).toBe(testData.industry);
+
+    await page.close();
+})
+
+
+test('Verify_existing_lead_details_assigned_to_admin_TC009', async({page})=> {
+
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    leadPage = new LeadPage(page);
+    await page.goto('/');
+    const testData = await getTestData('./test-data/leadData.json','Verify_existing_lead_details_assigned_to_admin_TC009')
+    await loginPage.login(testData.username, testData.password);
+    await homePage.clickLeads();
+    await leadPage.clickAdvancedLink();
+   // await page.waitForTimeout(4000);
+    await leadPage.selectAssignedto(testData.assignedto);
+   // await page.waitForTimeout(4000);
+    
+    await leadPage.clickAdvancedSearchButton()
+    
+
+    //await page.close();
 })

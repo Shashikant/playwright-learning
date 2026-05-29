@@ -37,7 +37,13 @@ export class LeadPage {
     loc_txt_company = '//td[contains(text(),"Company")]/following::td[1]';
     loc_btn_search = '//input[@name="button" and @value="Search"]';
     loc_txt_name = '(//td[contains(text(),"Lead List")]/following::tr[@class="oddListRow"]/td/a)[1]';
-
+    loc_edit_lead_lnk = '//tr[@class="oddListRow"]/td/a[contains(text(),"edit")]';
+    loc_leadname_lnk = '//tr[@class="oddListRow"]/td/a[contains(text(),"Smith")]';
+    loc_txt_salutationtype = '//td[contains(text(),"First Name:")]/following::td[1]';
+    loc_txt_industry = '//td[contains(text(),"Industry:")]/following::td[1]';
+    loc_lnk_advanced_search = '//a[text()="Advanced"]';
+    loc_dropdown_assignedto ='//select[@name="assigned_user_id"]';
+    loc_btn_advanced_search= '//td[contains(text(),"Lead Search")]/following::input[@value="Search"]';
     constructor(page: Page) {
         this.page = page;
     }
@@ -191,6 +197,11 @@ export class LeadPage {
     {
         await this.page.locator(this.loc_textbox_last_name).nth(1).fill(lastname);
     }
+
+    async searchbyCompany(lastname:string)
+    {
+        await this.page.locator(this.loc_textbox_company_name).nth(1).fill(lastname);
+    }
     async clickSearch()
     {
        await this.page.click(this.loc_btn_search);
@@ -217,5 +228,52 @@ export class LeadPage {
       }
       
         
+    }
+
+    async clickEditLeadLink()
+    {
+        await this.page.click(this.loc_edit_lead_lnk);
+    }
+
+    async editExistingLead(salutationtype:string, industry: string) 
+    {
+        await this.selectSalutationtype(salutationtype);
+        await this.selectIndustry(industry);
+        await this.clickSave();
+    }
+
+    async viewLead(){
+        await this.page.click(this.loc_leadname_lnk);
+    }
+
+    async getSaluationType():Promise<string|null>
+    {
+        return this.page.locator(this.loc_txt_salutationtype).textContent()
+    }
+
+    async getIndustry():Promise<string|null>
+    {
+        return this.page.locator(this.loc_txt_industry).textContent()
+    }
+
+    async clickAdvancedLink()
+    {
+        await this.page.click(this.loc_lnk_advanced_search);
+    }
+
+    async selectAssignedto(name: string): Promise<void> {
+        const dropdown = this.page.locator(this.loc_dropdown_assignedto);
+        const userid = await dropdown.selectOption({ label: name });   // select by label text
+        //await this.page.waitForTimeout(3000);
+        console.log('Selected value is',userid);
+        await expect(dropdown).toHaveValue('1');  // confirm "admin" is selected
+    }
+
+
+
+    async clickAdvancedSearchButton()
+    {
+        
+        await this.page.click(this.loc_btn_advanced_search);
     }
 }

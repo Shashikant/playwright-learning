@@ -5,30 +5,42 @@
         "lastname": "Jackson",
         "company": "Sony"
     },
-    "Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003":{
+    "Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003": {
         "username": "admin",
         "password": "admin",
         "lastname": "Tom",
         "company": "Zee"
     },
-    "Verify_Search_Existing_Lead_by_Firstname_TC004":{
+    "Verify_Search_Existing_Lead_by_Firstname_TC004": {
         "username": "admin",
         "password": "admin",
         "firstname": "Mary"
-        
     },
-    "Verify_Search_Existing_Lead_by_Lastname_TC005":{
+    "Verify_Search_Existing_Lead_by_Lastname_TC005": {
         "username": "admin",
         "password": "admin",
         "lastname": "Smith"
-        
-    }
-    ,
-    "Verify_Search_Invalid_Lead_TC006":{
+    },
+    "Verify_Search_Existing_Lead_by_Company_TC006": {
+        "username": "admin",
+        "password": "admin",
+        "company": "Google"
+    },
+    "Verify_Search_Invalid_Lead_TC007": {
         "username": "admin",
         "password": "admin",
         "lastname": "Shakti"
-        
+    },
+    "Verify_existing_lead_details_can_be_updated_TC008": {
+        "username": "admin",
+        "password": "admin",
+        "lastname": "Smith",
+        "salutationtype": "Ms.",
+        "industry":"Retail"
+    },
+    "Verify_existing_lead_details_assigned_to_admin_TC009": {
+        "username": "admin",
+        "password": "admin",
+        "assignedto": "admin"
     }
-
 }
