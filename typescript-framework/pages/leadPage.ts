@@ -42,8 +42,12 @@ export class LeadPage {
     loc_txt_salutationtype = '//td[contains(text(),"First Name:")]/following::td[1]';
     loc_txt_industry = '//td[contains(text(),"Industry:")]/following::td[1]';
     loc_lnk_advanced_search = '//a[text()="Advanced"]';
-    loc_dropdown_assignedto ='//select[@name="assigned_user_id"]';
-    loc_btn_advanced_search= '//td[contains(text(),"Lead Search")]/following::input[@value="Search"]';
+    loc_dropdown_assignedto = '//select[@name="assigned_user_id"]';
+    loc_btn_advanced_search = '//td[contains(text(),"Lead Search")]/following::input[@value="Search"]';
+    loc_txt_assignedto = '//td[contains(text(),"admin")]';
+    loc_table_row = '//tr[@class="oddListRow"]';
+    loc_img_next_btn = '//img[@src="themes/blue/images/next.gif"]';
+
     constructor(page: Page) {
         this.page = page;
     }
@@ -107,7 +111,7 @@ export class LeadPage {
     }
 
     async selectIndustry(industry: string) {
-        
+
         await this.page.locator(this.loc_dropdown_industry).selectOption(industry);
     }
 
@@ -189,91 +193,100 @@ export class LeadPage {
         return this.page.isVisible(this.loc_txt_company);
     }
 
-    async searchLeadFirstName(firstname:string)
-    {
+    async searchLeadFirstName(firstname: string) {
         await this.page.locator(this.loc_textbox_first_name).nth(1).fill(firstname);
     }
-    async searchLeadLastName(lastname:string)
-    {
+    async searchLeadLastName(lastname: string) {
         await this.page.locator(this.loc_textbox_last_name).nth(1).fill(lastname);
     }
 
-    async searchbyCompany(lastname:string)
-    {
+    async searchbyCompany(lastname: string) {
         await this.page.locator(this.loc_textbox_company_name).nth(1).fill(lastname);
     }
-    async clickSearch()
-    {
-       await this.page.click(this.loc_btn_search);
+    async clickSearch() {
+        await this.page.click(this.loc_btn_search);
     }
 
-    async isLeadFirstNameVisible():Promise<boolean|null>
-    {
+    async isLeadFirstNameVisible(): Promise<boolean | null> {
         const textName = await this.page.locator(this.loc_txt_name).textContent();
         console.log(textName);
         return await this.page.locator(this.loc_txt_name).isVisible();
     }
 
-    async isLeadLastNameVisible():Promise<boolean|null>
-    {
-      try{
-        await this.page.locator(this.loc_txt_name).waitFor({state:"visible",timeout: 3000});
-        const textName = await this.page.locator(this.loc_txt_name).textContent();
-        console.log(textName);
-        return await this.page.locator(this.loc_txt_name).isVisible();   
-      }
-      catch(error){
-        console.log("Lead serach failed or element not found");
-        return false;
-      }
-      
-        
+    async isLeadLastNameVisible(): Promise<boolean | null> {
+        try {
+            await this.page.locator(this.loc_txt_name).waitFor({ state: "visible", timeout: 3000 });
+            const textName = await this.page.locator(this.loc_txt_name).textContent();
+            console.log(textName);
+            return await this.page.locator(this.loc_txt_name).isVisible();
+        }
+        catch (error) {
+            console.log("Lead serach failed or element not found");
+            return false;
+        }
+
+
     }
 
-    async clickEditLeadLink()
-    {
+    async clickEditLeadLink() {
         await this.page.click(this.loc_edit_lead_lnk);
     }
 
-    async editExistingLead(salutationtype:string, industry: string) 
-    {
+    async editExistingLead(salutationtype: string, industry: string) {
         await this.selectSalutationtype(salutationtype);
         await this.selectIndustry(industry);
         await this.clickSave();
     }
 
-    async viewLead(){
+    async viewLead() {
         await this.page.click(this.loc_leadname_lnk);
     }
 
-    async getSaluationType():Promise<string|null>
-    {
+    async getSaluationType(): Promise<string | null> {
         return this.page.locator(this.loc_txt_salutationtype).textContent()
     }
 
-    async getIndustry():Promise<string|null>
-    {
+    async getIndustry(): Promise<string | null> {
         return this.page.locator(this.loc_txt_industry).textContent()
     }
 
-    async clickAdvancedLink()
-    {
+    async clickAdvancedLink() {
         await this.page.click(this.loc_lnk_advanced_search);
     }
 
     async selectAssignedto(name: string): Promise<void> {
         const dropdown = this.page.locator(this.loc_dropdown_assignedto);
         const userid = await dropdown.selectOption({ label: name });   // select by label text
-        //await this.page.waitForTimeout(3000);
-        console.log('Selected value is',userid);
         await expect(dropdown).toHaveValue('1');  // confirm "admin" is selected
     }
 
+    async clickAdvancedSearchButton() {
 
-
-    async clickAdvancedSearchButton()
-    {
-        
         await this.page.click(this.loc_btn_advanced_search);
+    }
+
+    async getAssignedValues(): Promise<string[]> {
+        
+
+        let allValues: string[] = [];
+
+        while (true) {
+            const rows = this.page.locator(this.loc_table_row);
+            await expect(rows.first()).toBeVisible();
+            const values = await this.page.locator(this.loc_txt_assignedto).allTextContents();
+            allValues.push(...values);
+
+            const nextButton = this.page.locator(this.loc_img_next_btn);
+            if(await nextButton.isVisible())
+            {
+                await nextButton.click();
+                await this.page.waitForLoadState('networkidle');
+            }
+            else
+            {
+                break;
+            }
+        }
+        return allValues;
     }
 }
