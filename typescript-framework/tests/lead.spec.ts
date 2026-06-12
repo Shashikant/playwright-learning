@@ -16,7 +16,7 @@ test('Verify_Create_NewLead_Mandatory_Fields_TC001', async ({ page }) => {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', "Verify_Create_NewLead_Mandatory_Fields_TC001");
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', "Verify_Create_NewLead_Mandatory_Fields_TC001");
     await loginPage.login(testData.username, testData.password);
     await homePage.clickNewLead();
     await leadPage.setLastName(testData.lastname);
@@ -38,7 +38,7 @@ test('Verify_Create_NewLead_All_Fields_TC002', async ({ page }) => {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getCSVTestData('./test-data/leadData.csv', 'Verify_Create_NewLead_All_Fields_TC002');
+    const testData = await getCSVTestData('./typescript-framework/test-data/leadData.csv', 'Verify_Create_NewLead_All_Fields_TC002');
     await loginPage.login(testData.username, testData.password);
     await homePage.clickNewLead();
     await leadPage.selectSalutationtype(testData.salutationtype);
@@ -82,7 +82,7 @@ test('Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003', async ({ pa
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', "Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003")
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', "Verify_Create_NewLead_Mandatory_Fields_From_Leads_Page_TC003")
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.setLastName(testData.lastname);
@@ -103,7 +103,7 @@ test('Verify_Search_Existing_Lead_by_Firstname_TC004', async ({ page }) => {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', 'Verify_Search_Existing_Lead_by_Firstname_TC004')
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', 'Verify_Search_Existing_Lead_by_Firstname_TC004')
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.searchLeadFirstName(testData.firstname)
@@ -119,7 +119,7 @@ test('Verify_Search_Existing_Lead_by_Lastname_TC005', async ({ page }) => {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', 'Verify_Search_Existing_Lead_by_Lastname_TC005')
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', 'Verify_Search_Existing_Lead_by_Lastname_TC005')
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.searchLeadLastName(testData.lastname);
@@ -136,7 +136,7 @@ test('Verify_Search_Existing_Lead_by_Company_TC006', async ({ page }) => {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', 'Verify_Search_Existing_Lead_by_Company_TC006')
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', 'Verify_Search_Existing_Lead_by_Company_TC006')
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.searchbyCompany(testData.company);
@@ -154,7 +154,7 @@ test('Verify_Search_Invalid_Lead_TC007', async ({ page }) => {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', 'Verify_Search_Invalid_Lead_TC007')
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', 'Verify_Search_Invalid_Lead_TC007')
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.searchLeadLastName(testData.lastname);
@@ -170,7 +170,7 @@ test('Verify_existing_lead_details_can_be_updated_TC008', async ({ page }) => {
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', 'Verify_existing_lead_details_can_be_updated_TC008')
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', 'Verify_existing_lead_details_can_be_updated_TC008')
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.searchLeadLastName(testData.lastname);
@@ -199,7 +199,7 @@ test('Verify_existing_lead_details_assigned_to_admin_TC009', async ({ page }) =>
     homePage = new HomePage(page);
     leadPage = new LeadPage(page);
     await page.goto('/');
-    const testData = await getTestData('./test-data/leadData.json', 'Verify_existing_lead_details_assigned_to_admin_TC009')
+    const testData = await getTestData('./typescript-framework/test-data/leadData.json', 'Verify_existing_lead_details_assigned_to_admin_TC009')
     await loginPage.login(testData.username, testData.password);
     await homePage.clickLeads();
     await leadPage.clickAdvancedLink();
